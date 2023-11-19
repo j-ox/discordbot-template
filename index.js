@@ -31,6 +31,13 @@ for (const file of funFiles) {
 }
 
 
+//Utils
+const utilsFiles = fs.readdirSync('./utils').filter(file => file.endsWith('.js'));
+for (const file of utilsFiles) {
+  const command = require(`./utils/${file}`);
+  client.commands.set(command.name, command);
+}
+
 
 client.on('messageCreate', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
