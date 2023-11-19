@@ -23,6 +23,13 @@ for (const file of devFiles) {
   client.commands.set(command.name, command);
 }
 
+//Fun
+const funFiles = fs.readdirSync('./fun').filter(file => file.endsWith('.js'));
+for (const file of funFiles) {
+  const command = require(`./fun/${file}`);
+  client.commands.set(command.name, command);
+}
+
 
 
 client.on('messageCreate', message => {
