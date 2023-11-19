@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, IntentsBitField, Collection } = require('discord.js');
+const { Client, IntentsBitField, Collection} = require('discord.js');
 const fs = require('fs');
 const prefix = '.';
 
@@ -12,9 +12,82 @@ const client = new Client({
     ],
   });
 
+  const REPUTATION_FILE = './reputation.json';
+  let reputation = {};
+// Testing
+
+// Load reputation data from file
+if (fs.existsSync(REPUTATION_FILE)) {
+  const data = fs.readFileSync(REPUTATION_FILE, 'utf8');
+ 
+  if (data) {
+    reputation = JSON.parse(data);
+  }
+}
+ 
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}`);
+});
+ 
+
+client.on('messageCreate', (message) => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+ 
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift().toLowerCase();
+ 
+  if (command === 'rep') {
+    const recipient = message.mentions.members.first();
+ 
+    if (!recipient) {
+      message.reply('Please mention a user to give reputation points to.');
+      return;
+    }
+ 
+    if (message.author.id === recipient.id) {
+      message.reply("You can't give reputation points to yourself.");
+      return;
+    }
+ 
+    const lastGiven = reputation[message.author.id]?.lastGiven || 0;
+    const currentTime = Date.now();
+ 
+    // Check if 24 hours have passed since the last given reputation
+    if (currentTime - lastGiven < 24 * 60 * 60 * 1000) {
+      message.reply("You can only give reputation points once every 24 hours.");
+      return;
+    }
+ 
+    reputation[message.author.id] = {
+      lastGiven: currentTime,
+    };
+ 
+    reputation[recipient.id] = {
+      reputation: (reputation[recipient.id]?.reputation || 0) + 1,
+    };
+ 
+    fs.writeFileSync(REPUTATION_FILE, JSON.stringify(reputation));
+ 
+    message.reply(`You have given 1 reputation point to ${recipient}.`);
+  }
+ 
+  if (command === 'check') {
+    const user = message.mentions.members.first() || message.member;
+ 
+    const userReputation = reputation[user.id]?.reputation || 0;
+ 
+    message.reply(`${user} has ${userReputation} reputation points.`);
+  }
+}); 
+// Testing
+
+
+
+
+
+
+
 client.commands = new Collection();
-
-
 
 //Dev
 const devFiles = fs.readdirSync('./dev').filter(file => file.endsWith('.js'));
@@ -64,9 +137,5 @@ client.on('messageCreate', message => {
 
 
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
-    startTime = new Date();
-  });
 
-  client.login(process.env.TOKEN);
+client.login(process.env.TOKEN);
