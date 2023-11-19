@@ -14,26 +14,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
-//Fun
-const commandFiles = fs.readdirSync('./fun').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-  const command = require(`./fun/${file}`);
-  client.commands.set(command.name, command);
-}
 
-//Moderation 
-const moderationFiles = fs.readdirSync('./moderation').filter(file => file.endsWith('.js'));
-for (const file of moderationFiles) {
-  const command = require(`./moderation/${file}`);
-  client.commands.set(command.name, command);
-}
-
-//Costume Commands
-const costumecommandsFiles = fs.readdirSync('./costumecommands').filter(file => file.endsWith('.js'));
-for (const file of costumecommandsFiles) {
-  const command = require(`./costumecommands/${file}`);
-  client.commands.set(command.name, command);
-}
 
 //Dev
 const devFiles = fs.readdirSync('./dev').filter(file => file.endsWith('.js'));
