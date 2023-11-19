@@ -38,6 +38,13 @@ for (const file of utilsFiles) {
   client.commands.set(command.name, command);
 }
 
+//Moderation 
+const moderationFiles = fs.readdirSync('./moderation').filter(file => file.endsWith('.js'));
+for (const file of moderationFiles) {
+  const command = require(`./moderation/${file}`);
+  client.commands.set(command.name, command);
+}
+
 
 client.on('messageCreate', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
