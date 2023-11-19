@@ -8,7 +8,6 @@ module.exports = {
         const randomNumber = Math.floor(Math.random() * 100);
         
         const embed = new EmbedBuilder()
-            .setTitle('Random Number')
             .setDescription(`Random Number: ${randomNumber}`)
             .setColor(color);
         
