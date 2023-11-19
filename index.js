@@ -72,6 +72,31 @@ client.on('messageCreate', message => {
 });
 
 
+client.on('messageCreate', async (message) => {
+  if (message.author.bot || !message.content.startsWith(prefix)) return;
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (command === 'breport') {
+    const guildId = '343540857410027522'; //ID guild
+    const channelId = '1175883611765997639'; //ID channel
+
+    const targetGuild = client.guilds.cache.get(guildId);
+    if (!targetGuild) {
+      return message.reply('Target guild not found. Please provide a valid guild ID.');
+    }
+
+    const targetChannel = targetGuild.channels.cache.get(channelId);
+    if (!targetChannel) {
+      return message.reply('Target channel not found. Please provide a valid channel ID.');
+    }
+
+    const messageContent = args.join(' ');
+    await targetChannel.send(`**Bug reported by:** ${message.author.username}\n**Server:** ${message.guild.name}\n**Bug:** ${messageContent}`);
+    message.reply('Bug sent successfully!');
+  }
+});
 
 
 client.login(process.env.TOKEN);
