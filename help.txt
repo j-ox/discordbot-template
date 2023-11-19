@@ -1,0 +1,64 @@
+Mod's prefix is : "."
+help : Sends you a list of commands and how to use them.
+ Example : <prefix><help>
+
+ botsupport: This is Mods Support Server.
+  Example: <prefix><botsupport>
+
+ invite : This is how to add Mod to your personal server.
+  Example: <prefix><invite>
+
+pin :  it will tell you how long it took <Bot Name> to answer your message. / API is how long it took for the api to process the command.
+ Example : <prefix><pin>
+
+say : Mod will repeat anythong you put after <prefix><say> "This is a bot" 
+ Example : <prefix><say>
+
+userinfo : Shows you a mention user information (ugly)
+ Example : <prefix><kick><@user>
+
+bugreport : report any bugs you stumble appon when using Mod  (NOT FULLY DONE)
+ Example : <prefix><bugreport><description>
+
+
+
+**Moderation** 
+clear : will erase an X ammount of messages recently sent in the past 2 days.
+Example : <prefi><clear> x
+kick : kicks a mentioned user. (They can still join after been kicked.)
+ Example : <prefi><kick><@user> 
+
+ban : bans any player mention (They will not be able to join back.)
+ Example : <prefix><ban><@user>
+
+unban : unbans an user but ID has to be provided.
+ Example : <prefix><unban><@user>
+
+addrole : gives a role to a mentioned user.
+ Example : <prefix><addrole><@user>
+
+removerole : removes a role from a mention user.
+ Example : <prefix><removerole><@user>
+
+mute : will mute a mention user.
+ Example : <prefix><mute> <@user>
+
+
+**Extras** 
+rn : Mod will choose a random number from 1 to 100.
+Example : <prefix><rn>
+
+math : will solve simple math probles.
+Example : <prefix><math><9+10> Mod will answer 21.
+
+
+
+
+Bot Owner Commands : 
+costume commnds
+Notes
+
+
+
+commands im working on 
+pastebin
