@@ -1,0 +1,7 @@
+Op reputation comnd
+Add a pastebin cmnd
+Add Welcome / Leave Message
+Add Bot Report Bug
+Add Star Board command (Mods Only)
+Add User info cmnd
+Add Server info cmnd
