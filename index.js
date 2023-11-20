@@ -20,6 +20,17 @@ client.on('ready', () => {
  
 
 // Testing
+client.on('messageCreate', async (message) => {
+  if (message.author.bot) return; // Ignore messages sent by bots
+  if (!message.content.startsWith(prefix)) return; // Ignore messages that don't start with the prefix
+
+
+  // Here, you can add your own command handling logic
+  // For demonstration purposes, let's just delete the command message after 30 seconds
+  setTimeout(() => {
+    message.delete().catch(console.error);
+  }, 30000);
+});
 // Testing
 
 client.commands = new Collection();
@@ -72,7 +83,7 @@ client.on('messageCreate', message => {
 });
 
 
-//Testing 
+//Bug Report System
 const { EmbedBuilder } = require('discord.js');
 
 client.on('messageCreate', async (message) => {
@@ -110,41 +121,5 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-/*
-client.on('messageCreate', async (message) => {
-  if (message.author.bot || !message.content.startsWith(prefix)) return;
-
-  const args = message.content.slice(prefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
-
-  if (command === 'breport') {
-    const guildId = '343540857410027522'; //ID guild
-    const channelId = '1175883611765997639'; //ID channel
-
-    const targetGuild = client.guilds.cache.get(guildId);
-    if (!targetGuild) {
-      return message.reply('Target guild not found. Please provide a valid guild ID.');
-    }
-
-    const targetChannel = targetGuild.channels.cache.get(channelId);
-    if (!targetChannel) {
-      return message.reply('Target channel not found. Please provide a valid channel ID.');
-    }
-
-    const messageContent = args.join(' ');
-    await targetChannel.send(`**Bug reported by:** ${message.author.username}\n**Server:** ${message.guild.name}\n**Bug:** ${messageContent}`);
-    message.reply('Bug sent successfully!');
-  }
-}); */
 
 client.login(process.env.TOKEN);
