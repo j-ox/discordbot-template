@@ -106,7 +106,7 @@ client.on('messageCreate', async (message) => {
       })
       .setDescription(`**Server:** ${message.guild.name}\n**Bug:** ${messageContent}`);
        await targetChannel.send({ embeds: [bugEmbed] });
-      message.reply('Bug sent successfully!');
+       message.reply('Bug sent successfully!').then(msg => msg.delete({ timeout:10000 }));
   }
 });
 
