@@ -19,19 +19,15 @@ client.on('ready', () => {
 });
  
 
-// Testing
+//Command Scanner
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) return; // Ignore messages sent by bots
-  if (!message.content.startsWith(prefix)) return; // Ignore messages that don't start with the prefix
-
-
-  // Here, you can add your own command handling logic
-  // For demonstration purposes, let's just delete the command message after 30 seconds
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
   setTimeout(() => {
     message.delete().catch(console.error);
   }, 30000);
 });
-// Testing
+
 
 client.commands = new Collection();
 
