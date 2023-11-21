@@ -119,6 +119,7 @@ client.on('messageCreate', async (message) => {
 
 // TESTING 
 
+
 // TESTING 
 
 client.login(process.env.TOKEN);
