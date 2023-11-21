@@ -7,10 +7,10 @@ module.exports = {
         const roles = message.guild.roles.cache.map(role => `<@&${role.id}>`).join(", ");
 
         const embed = new EmbedBuilder()
-            .setDescription(`Roles: ${roles}`)
+            .setDescription(`**Roles:** \n${roles}`)
             .setColor(getRandomColor());
 
-        message.channel.send({ content: 'Here are the roles:', embeds: [embed] });
+        message.channel.send({  embeds: [embed] });
     }
 };
 
