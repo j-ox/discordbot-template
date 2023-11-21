@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Client, IntentsBitField, Collection} = require('discord.js');
 const fs = require('fs');
-const prefix = '.';
+const {prefix}  = require('./config.json');
 
 const client = new Client({
     intents: [
@@ -89,8 +89,8 @@ client.on('messageCreate', async (message) => {
   const command = args.shift().toLowerCase();
 
   if (command === 'br') {
-    const guildId = '343540857410027522';
-    const channelId = '1175883611765997639';
+    const guildId = (process.env.GI);
+    const channelId = (process.env.CI);
 
     const targetGuild = client.guilds.cache.get(guildId);
     if (!targetGuild) {
