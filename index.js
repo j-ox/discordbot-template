@@ -117,5 +117,13 @@ client.on('messageCreate', async (message) => {
   }
 });
 
+// TESTING 
+client.on('messageCreate', message => {
+  if (message.content === '!roles') {
+      const roles = message.guild.roles.cache.map(role => role.name).join(", ");
+      message.channel.send(`Here are the roles in this server: ${roles}`);
+  }
+});
+// TESTING 
 
 client.login(process.env.TOKEN);
