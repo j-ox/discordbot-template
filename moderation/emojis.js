@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'emojis',
-    description: 'Displays all roles in the server',
+    description: 'Displays all emojis on a server',
     async execute(message) {
         let emojiList = message.guild.emojis.cache.map((e) => e.toString()).join(' ');
         if (!emojiList) {
