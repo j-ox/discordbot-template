@@ -117,8 +117,69 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-// TESTING 
+// Testing
 
-// TESTING 
+client.on('messageCreate', (message) => {
+  if (message.author.bot || !message.content.startsWith(prefix)) return;
 
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (command === 'start') {
+    startBlackjackGame(message);
+  }
+});
+
+function startBlackjackGame(message) {
+  const player = message.author;
+  const dealer = 'Bot';
+
+  const cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+  const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
+
+  const playerHand = drawRandomCard() + ' ' + drawRandomCard();
+  const dealerHand = drawRandomCard();
+
+  const playerTotal = calculateHandTotal(playerHand);
+  const dealerTotal = calculateHandTotal(dealerHand);
+
+  message.channel.send(`**Blackjack Game**\n\n${player} vs ${dealer}\n\nPlayer's Hand: ${playerHand} (Total: ${playerTotal})\nDealer's Hand: ${dealerHand}`);
+
+  if (playerTotal === 21) {
+    message.channel.send('Congratulations! You got a Blackjack!');
+  } else {
+    message.channel.send(`Type \`${prefix}hit\` to draw another card or \`${prefix}stand\` to finish your turn.`);
+  }
+}
+
+function drawRandomCard() {
+  const index = Math.floor(Math.random() * cards.length);
+  return cards[index];
+}
+
+function calculateHandTotal(hand) {
+  let total = 0;
+  let aceCount = 0;
+
+  const cardsInHand = hand.split(' ');
+
+  for (const card of cardsInHand) {
+    const cardIndex = cards.indexOf(card);
+    const cardValue = values[cardIndex];
+
+    total += cardValue;
+
+    if (card === 'A') {
+      aceCount++;
+    }
+  }
+
+  while (total > 21 && aceCount > 0) {
+    total -= 10;
+    aceCount--;
+  }
+
+  return total;
+}
 client.login(process.env.TOKEN);
+
