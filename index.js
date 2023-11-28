@@ -1,7 +1,6 @@
 require('dotenv').config();
 const { Client, IntentsBitField, Collection} = require('discord.js');
 const fs = require('fs');
-const axios = require('axios');
 const {prefix}  = require('./config.json');
 
 const client = new Client({
@@ -117,9 +116,6 @@ client.on('messageCreate', async (message) => {
        message.reply('Bug sent successfully!').then(msg => msg.delete({ timeout:10000 }));
   }
 });
-
-
-
 
 
 // Testing
