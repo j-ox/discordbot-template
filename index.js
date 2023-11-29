@@ -9,15 +9,31 @@ const client = new Client({
       IntentsBitField.Flags.GuildMembers,
       IntentsBitField.Flags.GuildMessages,
       IntentsBitField.Flags.MessageContent,
-    ],
+    ]
   });
 
-
  
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}`);
-});
+  
  
+ 
+  client.once('ready', () => {
+    console.log('Bot is ready!');
+    changeStatus(); 
+    setInterval(changeStatus, 60000);
+  });
+  
+  function changeStatus() {
+    const statusOptions = [`with Jox`,'Music','and helping', 'do for .help', `in ${client.guilds.cache.size} servers`];
+   
+    const randomOption = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+  
+  
+    client.user.setPresence({
+        activities: [{ name: `${randomOption}` }],
+        
+    });
+  }
+  
 
 //Command Scanner
 client.on('messageCreate', async (message) => {
@@ -118,7 +134,7 @@ client.on('messageCreate', async (message) => {
 });
 
 
-// Testing
+
 
 
 
